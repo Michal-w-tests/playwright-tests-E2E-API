@@ -65,7 +65,7 @@ npx playwright test tests/E2EDemoQA/PracticeForm.spec.ts --headed
 Michal Wagner
 💼 Open to opportunities as an automation tester
 
-📫 michal.wagner.mail@gmail.com
+📫 
 
 ⭐️ Bonus
 If you like this repo or find it useful, feel free to give it a ⭐️ on GitHub!
