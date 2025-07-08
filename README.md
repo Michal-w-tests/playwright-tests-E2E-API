@@ -8,16 +8,10 @@ The purpose is to demonstrate skills in automated testing, API interaction, dyna
 ---
 
 ## 📄 Structure
-tests/
-├── API/
-│ ├── helpers/ # Helper functions (e.g., dynamic token generation, create/update/delete order)
-│ ├── collectionDynamicToken.spec.ts
-│ ├── functionsTest.spec.ts
-│ └── other API tests...
-├── E2EDemoQA/
-│ ├── pages/ # Page Object Models for DemoQA practice form
-│ ├── PracticeForm.spec.ts
-│ └── other E2E tests...
+
+- `tests/API` — API tests and helper functions (e.g., token generation, order management)
+- `tests/E2EDemoQA` — E2E tests for DemoQA, includes Page Object Models
+- `tests/E2EOrangeHMR` — E2E tests for OrangeHRM (if included)
 
 
 ---
@@ -62,7 +56,7 @@ npx playwright show-report
 npx playwright test tests/E2EDemoQA/PracticeForm.spec.ts --headed
 
 💬 Author
-Michal Wagner
+Michal W.
 💼 Open to opportunities as an automation tester
 
 📫 
