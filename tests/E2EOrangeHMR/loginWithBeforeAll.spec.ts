@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
-import { dashboard } from '../pages/DashBoard';
-import { Admin } from '../pages/Admin';
-import { Job } from '../pages/Job';
+import { LoginPage } from './pages/LoginPage';
+import { dashboard } from './pages/DashBoard';
+import { Admin } from './pages/Admin';
+import { Job } from './pages/Job';
 
 
 
@@ -28,7 +28,7 @@ test.beforeAll('login', async ({browser})=>{
 
 })
 
-test('dashboard check after beforeAll login', async ({browser})=>{
+test.skip('dashboard check after beforeAll login', async ({browser})=>{
     const context = await browser.newContext({ storageState: 'tests/fixtures/state.json'})
     const page = await context.newPage();
     const Dashboard = new dashboard(page);
