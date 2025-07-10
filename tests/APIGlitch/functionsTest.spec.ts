@@ -1,10 +1,10 @@
 import { test, expect, APIRequestContext } from '@playwright/test';
 
-import { getDynamicToken } from "./helpers/getToken.spec";
-import { createOrder } from "./helpers/createOrder.spec";
-import { updateOrder } from "./helpers/uddateOrder.spec";
-import { deleteOrder } from "./helpers/deleteOrder.spec";
-import { getOrderDetail } from "./helpers/getOrderDetail.spec";
+import { getDynamicToken } from './helpers/getToken';
+import { createOrder } from "./helpers/createOrder";
+import { updateOrder } from "./helpers/uddateOrder";
+import { deleteOrder } from "./helpers/deleteOrder";
+import { getOrderDetail } from "./helpers/getOrderDetail";
 
 
 let token:string;

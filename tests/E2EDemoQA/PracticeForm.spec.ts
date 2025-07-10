@@ -24,7 +24,7 @@ await test.step('filling out the form', async()=>{
     //in this step i demonstrate POM by creating "page". In the page i create method for filling out this form and then i call this page into this test. 
     
     const Form = new PracticeFormPage(page); //here im calling the page 
-    await Form.fillForm('Jack','Black','SomeRandomMail@mail.com','1234567890') // here im calling the method created in POM
+    await Form.fillForm('Jack','Black','SomeRandomMail@mail.com','1234567890','Maths','English','test address','Uttar Pradesh','Lucknow') // here im calling the method created in POM
 })
 
 })
