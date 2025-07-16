@@ -58,15 +58,27 @@ npx playwright test
 4️⃣ View HTML report
 npx playwright show-report
 
+⚙️ Mock Server Setup
+This project uses json-server to simulate a fake API backend.
+
+Files needed
+db.json: Contains initial data (users, posts, etc.)
+
+server.js: Custom server configuration with middleware (e.g., token authorization)
+
+Example script in package.json
+
+"scripts": {
+  "mock-server": "node server.js"
+}
 
 💬 Author
 Michal W.
 💼 Open to opportunities as an automation tester
 
-📫
-
 ⭐️ Bonus
 If you like this repo or find it useful, feel free to give it a ⭐️ on GitHub!
+
 
 
 
