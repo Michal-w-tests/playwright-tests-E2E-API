@@ -23,9 +23,6 @@ test.describe.serial('User CRUD API Tests', () => {
             email: `michaltester${randomSuffix}@email.com`
         };
         const response = await apiContext.post('http://localhost:3000/users',{
-            headers:{
-                Authorization: 'Bearer my-secret-token',
-            },
             data: newUser
         })
         expect(response.status()).toBe(201);
