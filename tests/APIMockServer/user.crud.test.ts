@@ -73,6 +73,6 @@ test.describe.serial('User CRUD API Tests', () => {
 
     test('confirmation that user is deleted', async ()=>{
         const response = await apiContext.get(`http://localhost:3000/users/${createdUserId}`)
-        expect(response.status()).toBe(404)
+        expect(response.status()).toBe(404);
     })
 })
