@@ -1,0 +1,27 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john@example.com"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane@example.com"
+    }
+    
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "Hello World",
+      "author": "John Doe"
+    },
+    {
+      "id": 2,
+      "title": "Testing JSON Server",
+      "author": "Jane Smith"
+    }
+  ]
+}
