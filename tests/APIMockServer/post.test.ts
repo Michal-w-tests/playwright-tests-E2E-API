@@ -23,4 +23,12 @@ const baseURL = 'http://localhost:3000';
         expect(post.content).toBe("This is my first post.") // v db.json najdeme pre id.1 content s takymto textom.
     })
 
+    test('directly calling post/1 and verification', async ()=>{
+        const response = await apiContext.get(`${baseURL}/posts/1`);
+        expect(response.status()).toBe(200);
+
+        const data = await response.json();
+        expect(data.createdAt).toBe("2024-05-01T08:00:00Z");
+        expect(data.likes).toBe(5)
+    })
 })
