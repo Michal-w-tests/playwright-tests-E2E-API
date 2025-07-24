@@ -13,14 +13,28 @@
   ],
   "posts": [
     {
-      "id": 1,
-      "title": "Hello World",
-      "author": "John Doe"
-    },
-    {
-      "id": 2,
-      "title": "Testing JSON Server",
-      "author": "Jane Smith"
-    }
+    "id": 1,
+    "title": "Hello World",
+    "author": "John Doe",
+    "content": "This is my first post.",
+    "createdAt": "2024-05-01T08:00:00Z",
+    "likes": 5
+  },
+  {
+    "id": 2,
+    "title": "Testing JSON Server",
+    "author": "Jane Smith",
+    "content": "Mock APIs are great for learning.",
+    "createdAt": "2024-06-15T12:30:00Z",
+    "likes": 12
+  },
+  {
+    "id": 3,
+    "title": "TypeScript Tips",
+    "author": "John Doe",
+    "content": "Use interfaces for consistent data structures.",
+    "createdAt": "2024-07-01T09:00:00Z",
+    "likes": 21
+  } 
   ]
 }
