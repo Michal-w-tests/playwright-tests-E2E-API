@@ -1,7 +1,20 @@
 import { test, expect } from '@playwright/test';
 import { PracticeFormPage } from './pages/PracticeForm';
 
-let url = 'https://demoqa.com/'
+let url = 'https://demoqa.com/';
+
+export const testData = {
+  firstName: 'Jack',
+  lastName: 'Black',
+  email: 'jack@example.com',
+  mobileNR: '1234567890',
+  subject1: 'Maths',
+  subject2: 'English',
+  address: 'Test address',
+  state: 'Uttar Pradesh',
+  city: 'Agra'
+};
+
 
 test('Practice form fill out', async ({page})=>{
 
@@ -24,7 +37,11 @@ await test.step('filling out the form', async()=>{
     //in this step i demonstrate POM by creating "page". In the page i create method for filling out this form and then i call this page into this test. 
     
     const Form = new PracticeFormPage(page); //here im calling the page 
-    await Form.fillForm('Jack','Black','SomeRandomMail@mail.com','1234567890','Maths','English','test address','Uttar Pradesh','Lucknow') // here im calling the method created in POM
+    await Form.fillPersonalInfo(testData);
+    await Form.fillSubjects(testData);
+    await Form.selectLocation(testData);
+    await Form.submitForm();
+    await Form.verification(testData);
 })
 
 })

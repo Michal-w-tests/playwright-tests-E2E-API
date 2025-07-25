@@ -1,5 +1,5 @@
 import { Locator, Page, expect } from '@playwright/test';
-import { asyncWrapProviders } from 'async_hooks';
+
 
 export class PracticeFormPage {
   readonly page: Page;
@@ -37,30 +37,48 @@ export class PracticeFormPage {
 
   }
 
-  async fillForm(firstName: string, lastName: string, email: string, mobileNR: string, subject1: string,subject2: string,address: string,state: string,city:string) {
-    await this.FirstName.fill(firstName);
-    await this.LastName.fill(lastName);
-    await this.Email.fill(email);
+  async fillPersonalInfo(data: {firstName: string, lastName: string, email: string, mobileNR: string}){
+    await this.FirstName.fill(data.firstName);
+    await this.LastName.fill(data.lastName);
+    await this.Email.fill(data.email);
     await this.GenderMale.click();
-    await this.MobileNumber.fill(mobileNR);
+    await this.MobileNumber.fill(data.mobileNR);
+  };
+
+  async fillSubjects(data: {subject1: string,subject2: string}){
     await this.Subjects.click();
-    await this.Subjects.fill(subject1);
+    await this.Subjects.fill(data.subject1);
     await this.Subjects.press('Enter');
-    await this.Subjects.fill(subject2);
+    await this.Subjects.fill(data.subject2);
     await this.Subjects.press('Enter');
     await this.SportsHobby.click();
     await this.UploadPicture.setInputFiles('tests/E2EDemoQA/fixtures/UploadTest.png');
-    await this.Textarea.fill(address);
+  };
+
+  async selectLocation(data: {address: string,state: string,city:string}){
+    await this.Textarea.fill(data.address);
     await this.State.click();
-    await this.page.getByText(state).first().click();
+    await this.page.getByText(data.state).first().click();
     await this.City.click();
-    await this.page.getByText(city).first().click();
+    const cityOption = this.page.locator(`div[id^=react-select][id*=option]:has-text("${data.city}")`);
+    await expect(cityOption).toBeVisible(); // overenie, že sa možnosť načítala
+    await cityOption.click();
+    //await this.page.getByText(data.city).first().click();
+  };
 
-
-
-    //await this.SubmitButton.click();
-
+  async submitForm(){
+    await this.SubmitButton.click();
     // Overenie po odoslaní
-    //await expect(this.page.getByText('Thanks for submitting the form')).toBeVisible();
+    await expect(this.page.getByText('Thanks for submitting the form')).toBeVisible();
+  };
+
+  async verification(data: {firstName: string, lastName: string, email: string, mobileNR: string,subject1: string,subject2: string,state: string,city:string}){
+    await expect(this.page.getByRole('cell', { name: `${data.firstName} ${data.lastName}` })).toBeVisible();
+    await expect(this.page.getByRole('cell', { name: data.email })).toBeVisible();
+    await expect(this.page.getByRole('cell', { name: 'Male' })).toBeVisible();
+    await expect(this.page.getByRole('cell', { name: data.mobileNR })).toBeVisible();
+    await expect(this.page.getByRole('cell', { name: `${data.subject1}, ${data.subject2}` })).toBeVisible();
+    await expect(this.page.getByRole('cell', { name: 'UploadTest.png' })).toBeVisible();
+    await expect(this.page.getByRole('cell', { name: `${data.state} ${data.city}` })).toBeVisible();
   }
 }
