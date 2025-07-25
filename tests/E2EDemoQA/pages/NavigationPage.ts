@@ -17,17 +17,15 @@ export class NavigationPage {
 
     async LandToUrl(){
         await this.page.goto(url); 
-        expect(this.page.url()).toBe(url); 
-
-        const pageTitle = await this.page.title(); 
-        expect(pageTitle).toBe('DEMOQA');
+        await expect(this.page).toHaveURL(url);
+        await expect(this.page).toHaveTitle('DEMOQA');
     };
 
     async NavigationToPForm(){
         
-        expect(this.FormCard).toBeVisible();
+        await expect(this.FormCard).toBeVisible();
         await this.FormCard.click();
-        expect(this.FormCardVerifMessage).toBeVisible();
+        await expect(this.FormCardVerifMessage).toBeVisible();
         await this.NavigationToPracticeForm.click();
         await this.page.getByText("Student Registration Form").isVisible(); 
     }
