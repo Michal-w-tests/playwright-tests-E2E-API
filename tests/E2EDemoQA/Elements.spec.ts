@@ -18,6 +18,7 @@ await test.step('Text box section', async ()=>{
 await test.step('Check boxes', async ()=>{
     
     await Navigation.ElementsNavigation('Check Box');
+    await Elements.CheckBox()
 })
 
 })

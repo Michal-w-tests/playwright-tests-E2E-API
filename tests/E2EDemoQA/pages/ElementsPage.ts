@@ -7,6 +7,7 @@ export class ElementsPage {
     readonly CurrentAddress: Locator;
     readonly PermaAddress: Locator;
     readonly SubmitButton: Locator;
+    readonly home: Locator;
 
 
     constructor(page: Page){
@@ -15,7 +16,8 @@ export class ElementsPage {
         this.Email = page.locator('input[type="email"]');
         this.CurrentAddress = page.locator('#currentAddress');
         this.PermaAddress = page.locator('#permanentAddress');
-        this.SubmitButton = page.locator('#submit')
+        this.SubmitButton = page.locator('#submit');
+        this.home = page.locator('span.rct-title:has-text("Home")');
     }
 
     async TextBoxForm(userName: string,email: string,CurrentAdd: string,permanentAdd: string){
@@ -32,7 +34,25 @@ export class ElementsPage {
     };
 
     async CheckBox(){
+        
+        await this.home.click();
+        await expect(this.page.locator('#result')).toContainText('You have selected :')
+        await this.page.locator('button[aria-label="Toggle"]').click();
+        await expect(this.page.locator('span.rct-title:has-text("Desktop")')).toBeVisible();
+        await expect(this.page.locator('span.rct-title:has-text("Documents")')).toBeVisible();
+        await expect(this.page.locator('span.rct-title:has-text("Downloads")')).toBeVisible();
 
+        const downloadsCheckboxIcon = this.page.locator('label[for="tree-node-downloads"] .rct-icon').first();
+        await expect(downloadsCheckboxIcon).toHaveClass(/rct-icon-check/);
+
+        await downloadsCheckboxIcon.click();
+        await expect(downloadsCheckboxIcon).toHaveClass(/rct-icon-uncheck/);
+
+        await this.page.locator('button[aria-label="Toggle"]').nth(3).click();
+        await expect(this.page.locator('span.rct-title:has-text("Excel File.doc")')).toBeVisible();
+        
+        const excelCheckboxIcon = this.page.locator('label[for="tree-node-excelFile"] .rct-icon').first();
+        await expect(excelCheckboxIcon).toHaveClass(/rct-icon-uncheck/);
     }
 
 
