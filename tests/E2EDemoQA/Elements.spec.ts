@@ -21,4 +21,14 @@ await test.step('Check boxes', async ()=>{
     await Elements.CheckBox()
 })
 
+await test.step('Radio buttons', async()=>{
+    await Navigation.ElementsNavigation('Radio Button');
+    await Elements.RadioButtons();
+})
+
+await test.step('Web Tables', async ()=>{
+    await Navigation.ElementsNavigation('Web Tables');
+    await Elements.WebTablesAddData('Michal','Tester','name@example.com','20','5000','Relax')
+})
+
 })

@@ -55,5 +55,48 @@ export class ElementsPage {
         await expect(excelCheckboxIcon).toHaveClass(/rct-icon-uncheck/);
     }
 
+    async RadioButtons(){
+        
+        await expect(this.page.locator('h1.text-center')).toHaveText("Radio Button");
+        await this.page.locator('label[for="yesRadio"]').click();
+        await expect(this.page.locator('#yesRadio')).toBeChecked();
+        await expect(this.page.locator('span.text-success')).toHaveText('Yes');
+
+        await this.page.locator('label[for="impressiveRadio"]').click();
+        await expect(this.page.locator('#impressiveRadio')).toBeChecked();
+        await expect(this.page.locator('span.text-success')).toHaveText('Impressive');
+
+        await expect(this.page.locator('#noRadio')).toHaveClass(/disabled/);
+    }
+
+    async WebTablesAddData(FirstName:string, LastName:string,Email:string, age:string, salary:string, department:string){
+
+        await expect(this.page.locator('h1.text-center')).toBeVisible();
+        await this.page.locator('#addNewRecordButton').click();
+
+        await this.page.locator('input[placeholder="First Name"]').fill(FirstName);
+        await expect(this.page.locator('input[placeholder="First Name"]')).toHaveValue(FirstName);
+
+        await this.page.locator('#lastName').fill(LastName)
+        await expect(this.page.locator('#lastName')).toHaveValue(LastName);
+
+        await this.page.locator('#userEmail').fill(Email);
+        await expect(this.page.locator('#userEmail')).toHaveValue(Email);
+
+        await this.page.locator('#age').fill(age);
+        await expect(this.page.locator('#age')).toHaveValue(age);
+
+        await this.page.locator('#salary').fill(salary);
+        await expect(this.page.locator('#salary')).toHaveValue(salary);
+
+        await this.page.locator('#department').fill(department);
+        await expect(this.page.locator('#department')).toHaveValue(department);
+
+        await this.SubmitButton.click();
+        await expect(this.page.locator('div.rt-td:has-text("Relax")')).toBeVisible();
+        
+
+
+    }
 
 }
