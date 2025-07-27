@@ -10,9 +10,7 @@ export class NavigationPage {
 
     constructor(page: Page){
         this.page = page;
-        this.FormCard = page.locator('div.card-body:has-text("Forms")');
-        this.FormCardVerifMessage = page.getByText('Please select an item from left to start practice.');
-        this.NavigationToPracticeForm = page.locator('span.text:has-text("Practice Form")');
+    
     }
 
     async LandToUrl(){
@@ -21,12 +19,17 @@ export class NavigationPage {
         await expect(this.page).toHaveTitle('DEMOQA');
     };
 
-    async NavigationToPForm(){
-        
-        await expect(this.FormCard).toBeVisible();
-        await this.FormCard.click();
-        await expect(this.FormCardVerifMessage).toBeVisible();
-        await this.NavigationToPracticeForm.click();
-        await this.page.getByText("Student Registration Form").isVisible(); 
-    }
+    async navigateToSection(sectionName: string, expectedLeftPanelText: string,section: string,) {
+        const sectionCard = this.page.locator(`div.card-body:has-text("${sectionName}")`);
+        const leftPanelText = this.page.getByText(expectedLeftPanelText);
+
+        await expect(sectionCard).toBeVisible();
+        await sectionCard.click();
+        await expect(leftPanelText).toBeVisible();
+
+        const navLink = this.page.locator(`span.text:has-text("${section}")`);
+        await navLink.click();
+
+}
+
 }

@@ -20,7 +20,7 @@ test('Practice form fill out', async ({page})=>{
  await test.step('landing on the page and navigating to form', async ()=>{
     const Navigation = new NavigationPage(page);
     await Navigation.LandToUrl();
-    await Navigation.NavigationToPForm();
+    await Navigation.navigateToSection('Forms','Please select an item from left to start practice.','Practice Form',);
 })
 await test.step('filling out the form', async()=>{ 
     
