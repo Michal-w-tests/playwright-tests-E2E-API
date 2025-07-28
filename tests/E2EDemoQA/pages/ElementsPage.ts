@@ -116,4 +116,18 @@ export class ElementsPage {
 
     }
 
+    async ButtonsOperations (){
+        await this.page.locator('#doubleClickBtn').dblclick();
+        await expect(this.page.locator('#doubleClickMessage')).toHaveText('You have done a double click');
+
+        await this.page.locator('#rightClickBtn').click({button: 'right'});
+        await expect(this.page.locator('#rightClickMessage')).toHaveText('You have done a right click');
+
+        await this.page.getByText('Click Me').last().click();
+        const dynamicMessage = this.page.locator('#dynamicClickMessage');
+        await expect(dynamicMessage).toBeVisible();
+        await expect(dynamicMessage).toHaveText('You have done a dynamic click');
+
+    }
+
 }

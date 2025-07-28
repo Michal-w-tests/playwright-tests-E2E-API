@@ -34,4 +34,9 @@ await test.step('Web Tables', async ()=>{
     await Elements.DeleteRecord('Cierra')
 })
 
+await test.step('Buttons', async ()=>{
+    await Navigation.ElementsNavigation('Buttons');
+    await Elements.ButtonsOperations();
+})
+
 })
