@@ -45,7 +45,7 @@ export class ElementsPage {
         const downloadsCheckboxIcon = this.page.locator('label[for="tree-node-downloads"] .rct-icon').first();
         await expect(downloadsCheckboxIcon).toHaveClass(/rct-icon-check/);
 
-        await downloadsCheckboxIcon.click();
+        await downloadsCheckboxIcon.click({timeout:10000});
         await expect(downloadsCheckboxIcon).toHaveClass(/rct-icon-uncheck/);
 
         await this.page.locator('button[aria-label="Toggle"]').nth(3).click();
@@ -95,7 +95,24 @@ export class ElementsPage {
         await this.SubmitButton.click();
         await expect(this.page.locator('div.rt-td:has-text("Relax")')).toBeVisible();
         
+    }
 
+    async EditingWebTable(EditedName:string){
+        await this.page.locator('#edit-record-2').click();
+        await this.page.locator('#firstName').fill(EditedName);
+        await this.SubmitButton.click();
+        await expect(this.page.locator(`div.rt-td:has-text("${EditedName}")`)).toBeVisible()
+    }
+
+    async SearchInTable(Name:string, AnotherRecord:string){
+        await this.page.locator('#searchBox').fill(Name);
+        await expect(this.page.locator(`div.rt-td:has-text("${Name}")`).first()).toBeVisible();
+        await expect(this.page.locator(`div.rt-td:has-text("${AnotherRecord}")`)).not.toBeVisible();
+        await this.page.locator('#searchBox').clear()
+    }
+    async DeleteRecord(Name:string){
+        await this.page.locator('#delete-record-1').click();
+        await expect(this.page.locator(`div.rt-td:has-text("${Name}")`)).not.toBeVisible();
 
     }
 

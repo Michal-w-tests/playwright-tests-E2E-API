@@ -24,7 +24,7 @@ export class NavigationPage {
         const leftPanelText = this.page.getByText(expectedLeftPanelText);
 
         await expect(sectionCard).toBeVisible();
-        await sectionCard.click();
+        await sectionCard.click({timeout: 10000});
         await expect(leftPanelText).toBeVisible();
 
         const navLink = this.page.locator(`span.text:has-text("${section}")`);

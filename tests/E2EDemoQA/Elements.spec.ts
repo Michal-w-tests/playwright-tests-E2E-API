@@ -28,7 +28,10 @@ await test.step('Radio buttons', async()=>{
 
 await test.step('Web Tables', async ()=>{
     await Navigation.ElementsNavigation('Web Tables');
-    await Elements.WebTablesAddData('Michal','Tester','name@example.com','20','5000','Relax')
+    await Elements.WebTablesAddData('Michal','Tester','name@example.com','20','5000','Relax');
+    await Elements.EditingWebTable('Edited First Name');
+    await Elements.SearchInTable('Cierra','Michal');
+    await Elements.DeleteRecord('Cierra')
 })
 
 })
