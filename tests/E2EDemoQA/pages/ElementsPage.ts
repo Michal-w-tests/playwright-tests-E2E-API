@@ -1,4 +1,6 @@
 import { Locator, Page, expect } from '@playwright/test';
+import * as path from 'path';
+import { promises as fs } from 'fs';
 
 export class ElementsPage {
     readonly page: Page;
@@ -53,7 +55,7 @@ export class ElementsPage {
         
         const excelCheckboxIcon = this.page.locator('label[for="tree-node-excelFile"] .rct-icon').first();
         await expect(excelCheckboxIcon).toHaveClass(/rct-icon-uncheck/);
-    }
+    };
 
     async RadioButtons(){
         
@@ -67,7 +69,7 @@ export class ElementsPage {
         await expect(this.page.locator('span.text-success')).toHaveText('Impressive');
 
         await expect(this.page.locator('#noRadio')).toHaveClass(/disabled/);
-    }
+    };
 
     async WebTablesAddData(FirstName:string, LastName:string,Email:string, age:string, salary:string, department:string){
 
@@ -95,26 +97,27 @@ export class ElementsPage {
         await this.SubmitButton.click();
         await expect(this.page.locator('div.rt-td:has-text("Relax")')).toBeVisible();
         
-    }
+    };
 
     async EditingWebTable(EditedName:string){
         await this.page.locator('#edit-record-2').click();
         await this.page.locator('#firstName').fill(EditedName);
         await this.SubmitButton.click();
         await expect(this.page.locator(`div.rt-td:has-text("${EditedName}")`)).toBeVisible()
-    }
+    };
 
     async SearchInTable(Name:string, AnotherRecord:string){
         await this.page.locator('#searchBox').fill(Name);
         await expect(this.page.locator(`div.rt-td:has-text("${Name}")`).first()).toBeVisible();
         await expect(this.page.locator(`div.rt-td:has-text("${AnotherRecord}")`)).not.toBeVisible();
         await this.page.locator('#searchBox').clear()
-    }
+    };
+
     async DeleteRecord(Name:string){
         await this.page.locator('#delete-record-1').click();
         await expect(this.page.locator(`div.rt-td:has-text("${Name}")`)).not.toBeVisible();
 
-    }
+    };
 
     async ButtonsOperations (){
         await this.page.locator('#doubleClickBtn').dblclick();
@@ -128,7 +131,7 @@ export class ElementsPage {
         await expect(dynamicMessage).toBeVisible();
         await expect(dynamicMessage).toHaveText('You have done a dynamic click');
 
-    }
+    };
 
     async verifyNewTabOpens(linkId: string, expectedUrl: string) {
         const [newTab] = await Promise.all([
@@ -137,7 +140,7 @@ export class ElementsPage {
         ]);
         await expect(newTab).toHaveURL(expectedUrl);
         await newTab.close()
-    }
+    };
 
     async verifyApiLinkResponse(linkID:string, responseMessage:string, number:string){
         this.page.locator(`#${linkID}`).click();
@@ -147,6 +150,40 @@ export class ElementsPage {
 
         await expect(response).toContainText(responseMessage);
         await expect(response).toContainText(number);
-    }
+    };
 
+    async uploadFile(fileName:string){
+        const filePath = `tests/E2EDemoQA/fixtures/${fileName}`;
+
+        // Upload súbor
+        await this.page.locator('#uploadFile').setInputFiles(filePath);
+
+        // Overenie mena súboru
+        const uploadedText = await this.page.locator('#uploadedFilePath');
+        await expect(uploadedText).toContainText(fileName);
+    };
+
+    async downloadFileAndVerify(expectedFileName: string) {
+        const downloadsDir = path.resolve('tests', 'E2EDemoQA', 'downloads');
+
+        const [download] = await Promise.all([
+        this.page.waitForEvent('download'),
+        this.page.locator('#downloadButton').click()
+  ]);
+
+        const suggestedFileName = download.suggestedFilename();
+        expect(suggestedFileName).toBe(expectedFileName);
+
+        const downloadPath = path.join(downloadsDir, suggestedFileName);
+
+        // 💾 Save to disk
+        await download.saveAs(downloadPath);
+
+        // ✅ Over, že súbor existuje
+        const fileExists = await fs.access(downloadPath).then(() => true).catch(() => false);
+        expect(fileExists).toBe(true);
+
+        // 🧹 Vymaž po teste
+         await fs.unlink(downloadPath);
+}
 }

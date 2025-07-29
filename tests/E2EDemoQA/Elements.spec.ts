@@ -54,5 +54,9 @@ await test.step('Links',async()=>{
 
 })
 
-
+await test.step('Upload and Download',async ()=>{
+    await Navigation.ElementsNavigation('Upload and Download');
+    await Elements.uploadFile('UploadTest.png');
+    await Elements.downloadFileAndVerify('sampleFile.jpeg');
+})
 })
