@@ -39,4 +39,20 @@ await test.step('Buttons', async ()=>{
     await Elements.ButtonsOperations();
 })
 
+await test.step('Links',async()=>{
+    await Navigation.ElementsNavigation('Links');
+    await Elements.verifyNewTabOpens('simpleLink','https://demoqa.com');
+    await Elements.verifyNewTabOpens('dynamicLink','https://demoqa.com');
+
+    await Elements.verifyApiLinkResponse('created','201','Created');
+    await Elements.verifyApiLinkResponse('no-content','204','No Content');
+    await Elements.verifyApiLinkResponse('moved','301','Moved Permanently');
+    await Elements.verifyApiLinkResponse('bad-request','400','Bad Request');
+    await Elements.verifyApiLinkResponse('unauthorized','401','Unauthorized');
+    await Elements.verifyApiLinkResponse('forbidden','403','Forbidden');
+    await Elements.verifyApiLinkResponse('invalid-url','404','Not Found');
+
+})
+
+
 })

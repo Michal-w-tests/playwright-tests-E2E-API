@@ -130,4 +130,23 @@ export class ElementsPage {
 
     }
 
+    async verifyNewTabOpens(linkId: string, expectedUrl: string) {
+        const [newTab] = await Promise.all([
+            this.page.waitForEvent('popup'),
+            this.page.locator(`#${linkId}`).click()
+        ]);
+        await expect(newTab).toHaveURL(expectedUrl);
+        await newTab.close()
+    }
+
+    async verifyApiLinkResponse(linkID:string, responseMessage:string, number:string){
+        this.page.locator(`#${linkID}`).click();
+
+        const response = this.page.locator('#linkResponse')
+        await expect(response).toBeVisible();
+
+        await expect(response).toContainText(responseMessage);
+        await expect(response).toContainText(number);
+    }
+
 }
