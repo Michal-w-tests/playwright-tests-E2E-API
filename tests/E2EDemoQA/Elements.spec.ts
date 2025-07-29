@@ -10,21 +10,21 @@ test('Playing with elements', async ({page})=>{
     
     await Navigation.LandToUrl();
     await Navigation.navigateToSection('Elements','Please select an item from left to start practice.','Text Box',);
-})
+});
 await test.step('Text box section', async ()=>{
     
     await Elements.TextBoxForm('Jozko Ferko','someEmail@email.com','CurrentAdd','PermanentADD')
-})
+});
 await test.step('Check boxes', async ()=>{
     
     await Navigation.ElementsNavigation('Check Box');
     await Elements.CheckBox()
-})
+});
 
 await test.step('Radio buttons', async()=>{
     await Navigation.ElementsNavigation('Radio Button');
     await Elements.RadioButtons();
-})
+});
 
 await test.step('Web Tables', async ()=>{
     await Navigation.ElementsNavigation('Web Tables');
@@ -32,12 +32,12 @@ await test.step('Web Tables', async ()=>{
     await Elements.EditingWebTable('Edited First Name');
     await Elements.SearchInTable('Cierra','Michal');
     await Elements.DeleteRecord('Cierra')
-})
+});
 
 await test.step('Buttons', async ()=>{
     await Navigation.ElementsNavigation('Buttons');
     await Elements.ButtonsOperations();
-})
+});
 
 await test.step('Links',async()=>{
     await Navigation.ElementsNavigation('Links');
@@ -52,11 +52,17 @@ await test.step('Links',async()=>{
     await Elements.verifyApiLinkResponse('forbidden','403','Forbidden');
     await Elements.verifyApiLinkResponse('invalid-url','404','Not Found');
 
-})
+});
 
 await test.step('Upload and Download',async ()=>{
     await Navigation.ElementsNavigation('Upload and Download');
     await Elements.uploadFile('UploadTest.png');
     await Elements.downloadFileAndVerify('sampleFile.jpeg');
+});
+
+await test.step('checking dynamic properties behavior', async () => {
+    await Navigation.ElementsNavigation('Dynamic Properties');
+    await Elements.DynamicProperties(); 
 })
+
 })

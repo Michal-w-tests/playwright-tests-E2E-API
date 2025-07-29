@@ -10,6 +10,9 @@ export class ElementsPage {
     readonly PermaAddress: Locator;
     readonly SubmitButton: Locator;
     readonly home: Locator;
+    readonly enableAfterButton: Locator;
+    readonly colorChangeButton: Locator;
+    readonly visibleAfterButton: Locator;
 
 
     constructor(page: Page){
@@ -20,6 +23,9 @@ export class ElementsPage {
         this.PermaAddress = page.locator('#permanentAddress');
         this.SubmitButton = page.locator('#submit');
         this.home = page.locator('span.rct-title:has-text("Home")');
+        this.enableAfterButton = page.locator('#enableAfter');
+        this.colorChangeButton = page.locator('#colorChange');
+        this.visibleAfterButton = page.locator('#visibleAfter');
     }
 
     async TextBoxForm(userName: string,email: string,CurrentAdd: string,permanentAdd: string){
@@ -185,5 +191,22 @@ export class ElementsPage {
 
         // 🧹 Vymaž po teste
          await fs.unlink(downloadPath);
+};
+
+async DynamicProperties() {
+    // Overenie, že tlačidlo je na začiatku zakázané
+    await expect(this.enableAfterButton).toBeDisabled();
+
+    // Počkaj, kým bude tlačidlo enabled (timeout 6s pre istotu)
+    await expect(this.enableAfterButton).toBeEnabled({ timeout: 6000 });
+
+    // Overenie, že tlačidlu pribudne trieda `text-danger`
+    await expect(this.colorChangeButton).toHaveClass(/text-danger/, { timeout: 6000 });
+
+    // Overenie, že tretie tlačidlo sa stane viditeľným
+    await expect(this.visibleAfterButton).toBeVisible({ timeout: 6000 });
 }
+
+
+
 }
