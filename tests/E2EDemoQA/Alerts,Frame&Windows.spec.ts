@@ -13,7 +13,12 @@ test('Alerts,Frame and Windows',async({page})=>{
     });
 
     await test.step('Alerts',async()=>{
-        await Navigation.Navigation('Alerts')
+        await Navigation.Navigation('Alerts');
+        await AFW.Alert();
+        await AFW.DelayAlert();
+        await AFW.ConfirmBoxAccept('Ok');
+        await AFW.ConfirmBoxDissmiss('Cancel');
+        await AFW.PromptAlert('Michal')
     })
 
 })
