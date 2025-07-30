@@ -17,6 +17,7 @@ export class PracticeFormPage {
   readonly Textarea: Locator;
   readonly State:Locator;
   readonly City:Locator;
+  readonly CloseFormButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -33,7 +34,8 @@ export class PracticeFormPage {
     this.UploadPicture = page.locator('#uploadPicture');
     this.Textarea = page.locator('textarea[placeholder="Current Address"]');
     this.State = page.locator('#state');
-    this.City = page.locator('#city')
+    this.City = page.locator('#city');
+    this.CloseFormButton = page.locator('#closeLargeModal');
 
   }
 
@@ -80,5 +82,7 @@ export class PracticeFormPage {
     await expect(this.page.getByRole('cell', { name: `${data.subject1}, ${data.subject2}` })).toBeVisible();
     await expect(this.page.getByRole('cell', { name: 'UploadTest.png' })).toBeVisible();
     await expect(this.page.getByRole('cell', { name: `${data.state} ${data.city}` })).toBeVisible();
+
+    await this.CloseFormButton.click();
   }
 }

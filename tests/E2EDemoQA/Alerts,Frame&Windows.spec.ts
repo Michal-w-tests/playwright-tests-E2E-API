@@ -10,6 +10,10 @@ test('Alerts,Frame and Windows',async({page})=>{
         await Navigation.LandToUrl();
         await Navigation.navigateToSection('Alerts, Frame & Windows','Please select an item from left to start practice.','Browser Windows')
         await AFW.BrowserWindows('https://demoqa.com/sample')
+    });
+
+    await test.step('Alerts',async()=>{
+        await Navigation.Navigation('Alerts')
     })
 
 })

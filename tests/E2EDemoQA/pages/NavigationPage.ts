@@ -32,7 +32,7 @@ export class NavigationPage {
 
 }
 
-    async ElementsNavigation(section:string){
+    async Navigation(section:string){
         const navLink = this.page.locator(`span.text:has-text("${section}")`);
         await navLink.first().click();
     }
