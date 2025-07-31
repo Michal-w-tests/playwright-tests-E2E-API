@@ -130,6 +130,28 @@ export class AlertsFrameWindowsPage {
             throw new Error ('this is really bad situation')
         }
         await expect(frame.locator('#sampleHeading')).toHaveText('This is a sample page')
+    };
+
+    async NestedFrames(){
+        const parentFrame = await this.page.locator('#frame1').elementHandle();
+        if (!parentFrame){
+            throw new Error('can not be true')
+        }
+        const parent = await parentFrame.contentFrame();
+        if (!parent){
+            throw new Error('oh no')
+        }
+        await expect(parent.locator('body')).toHaveText('Parent frame');
+
+        const childFrame = await parent.locator('iframe').elementHandle();
+        if (!childFrame){
+            throw new Error('bad bad bad')
+        }
+        const child = await childFrame.contentFrame();
+        if (!child){
+            throw new Error('im done')
+        }
+        await expect(child.locator('p')).toHaveText('Child Iframe')
     }
 
 }

@@ -27,4 +27,10 @@ test('Alerts,Frame and Windows',async({page})=>{
         await AFW.Frame1();
         await AFW.Frame2();
     })
+
+    await test.step('Nested Frames',async()=>{
+        await Navigation.Navigation('Nested Frames');
+        await AFW.NestedFrames()
+    });
+    
 })
