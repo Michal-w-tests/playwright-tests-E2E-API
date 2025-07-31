@@ -1,4 +1,5 @@
 import { test,expect, Page, Locator } from '@playwright/test'
+import { error } from 'console';
 import { TIMEOUT } from 'dns';
 
 export class AlertsFrameWindowsPage {
@@ -103,5 +104,32 @@ export class AlertsFrameWindowsPage {
         await expect(Result).toContainText(inputText)
     };
 
+    async Frame1(){
+       const ElementHandle = await this.page.locator('#frame1').elementHandle();
+       
+       if (!ElementHandle){
+            throw new Error ('Frame element #frame1 not found');
+       }
+       
+       const frame = await ElementHandle.contentFrame();
+
+       if (!frame){
+            throw new Error ('Could not get contentFrame from element #frame1');
+       }
+
+       await expect(frame.locator('h1')).toHaveText('This is a sample page');
+    }
+
+    async Frame2(){
+        const frameHandling = await this.page.locator('#frame2').elementHandle();
+        if (!frameHandling){
+            throw new Error ('ups, something went wrong')
+        }
+        const frame = await frameHandling.contentFrame();
+        if (!frame){
+            throw new Error ('this is really bad situation')
+        }
+        await expect(frame.locator('#sampleHeading')).toHaveText('This is a sample page')
+    }
 
 }

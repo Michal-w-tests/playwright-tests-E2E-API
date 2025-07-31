@@ -19,6 +19,12 @@ test('Alerts,Frame and Windows',async({page})=>{
         await AFW.ConfirmBoxAccept('Ok');
         await AFW.ConfirmBoxDissmiss('Cancel');
         await AFW.PromptAlert('Michal')
-    })
+    });
 
+
+    await test.step('Frame',async()=>{
+        await Navigation.Navigation('Frames');
+        await AFW.Frame1();
+        await AFW.Frame2();
+    })
 })
