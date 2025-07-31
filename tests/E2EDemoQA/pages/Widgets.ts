@@ -28,6 +28,10 @@ export class WidgetsClass {
         await expect(Text2.last()).not.toBeVisible();
         await expect(Text1).not.toBeVisible();
 
+        await section3.click();
+        await expect(Text3).not.toBeVisible();
+
+
     }
 
 }
