@@ -26,11 +26,15 @@ test('Alerts,Frame and Windows',async({page})=>{
         await Navigation.Navigation('Frames');
         await AFW.Frame1();
         await AFW.Frame2();
-    })
+    });
 
     await test.step('Nested Frames',async()=>{
         await Navigation.Navigation('Nested Frames');
         await AFW.NestedFrames()
     });
-    
+
+    await test.step('Modal Dialogs',async()=>{
+        await Navigation.Navigation('Modal Dialogs');
+        await AFW.ModalDialogs();
+    })
 })

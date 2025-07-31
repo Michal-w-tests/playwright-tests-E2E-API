@@ -152,6 +152,22 @@ export class AlertsFrameWindowsPage {
             throw new Error('im done')
         }
         await expect(child.locator('p')).toHaveText('Child Iframe')
+    };
+
+    async ModalDialogs(){
+        //small dialog
+        await this.page.locator('#showSmallModal').click();
+        await expect(this.page.locator('div.modal-content')).toBeVisible();
+        await expect(this.page.locator('div.modal-body')).toContainText('This is a small modal. It has very less content');
+        await this.page.locator('#closeSmallModal').click();
+        await expect(this.page.locator('div.modal-content')).toBeHidden();
+
+        //big dialog
+        await this.page.locator('#showLargeModal').click();
+        await expect(this.page.locator('div.modal-content')).toBeVisible();
+        await expect(this.page.locator('div.modal-body > p')).toContainText('Lorem Ipsum');
+        await this.page.locator('#closeLargeModal').click()
+        await expect(this.page.locator('div.modal-content')).toBeHidden();
     }
 
 }
