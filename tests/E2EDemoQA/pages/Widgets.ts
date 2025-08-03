@@ -110,6 +110,27 @@ export class WidgetsClass {
         const valueNow = await this.page.locator('.progress-bar').getAttribute('aria-valuenow');
         expect(Number(valueNow)).toBeGreaterThan(18);
         expect(Number(valueNow)).toBeLessThan(22);
+    };
+
+    async Tabs(text1:string,text2a:string,text2b:string,text3:string){
+        const What = this.page.locator('#demo-tabpane-what > p.mt-3');
+        await expect(What).toHaveText(text1);
+
+        await this.page.locator('#demo-tab-origin').click();
+        const origin = this.page.locator('#demo-tabpane-origin > p');
+        await expect(origin.first()).toContainText(text2a);
+        await expect(origin.last()).toContainText(text2b);
+
+        await this.page.locator('#demo-tab-use').click();
+        const use = this.page.locator('#demo-tabpane-use > p.mt-3');
+        await expect(use).toHaveText(text3);
+
+        const more = this.page.locator('#demo-tab-more');
+        await expect(more).toHaveAttribute('aria-disabled', 'true'); 
+        //or 
+        await expect(more).toHaveClass(/disabled/);
+
+
     }
 
 }

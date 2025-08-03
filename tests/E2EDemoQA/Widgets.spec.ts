@@ -26,7 +26,6 @@ const Widgets = new WidgetsClass(page);
         await Navigation.Navigation('Date Picker');
         await Widgets.DatePicker('07/03/2025','06/05/2024');
         await Widgets.DateAndTimePicker('August 3, 2025 8:00 AM','August 2, 2025 8:30 PM');
-        
     });
 
     await test.step('Slider',async()=>{
@@ -37,6 +36,15 @@ const Widgets = new WidgetsClass(page);
     await test.step('Progress Bar',async()=>{
         await Navigation.Navigation('Progress Bar');
         await Widgets.ProgressBar()
+    });
+
+    await test.step('Tabs',async()=>{
+        await Navigation.Navigation('Tabs');
+        await Widgets.Tabs(accordionTexts.WhatisLoremIpsum,
+                            accordionTexts.WhereDoesItComeFrom_part1,
+                            accordionTexts.WhereDoesItComeFrom_part2,
+                            accordionTexts.WhyDoWeUseIt
+        )
     })
 
 })
