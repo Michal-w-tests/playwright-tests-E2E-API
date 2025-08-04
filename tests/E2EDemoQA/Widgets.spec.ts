@@ -52,4 +52,9 @@ const Widgets = new WidgetsClass(page);
         await Widgets.ToolTips();
     });
 
+    await test.step('Menu',async()=>{
+        await Navigation.Navigation('Menu');
+        await Widgets.Menu()
+    })
+
 })

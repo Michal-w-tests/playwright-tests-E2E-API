@@ -167,6 +167,38 @@ export class WidgetsClass {
 
     };
 
+    async Menu (){
+        const MainItem1 = this.page.locator('a:has-text("Main Item 1")');
+        await MainItem1.waitFor({state:'visible'});
+        await MainItem1.hover()
+
+        const MainItem2 = this.page.locator('li a').nth(1); // Main Item 2
+        await MainItem2.hover();
+
+        const SubItem = this.page.locator('a:has-text("Sub Item")').first();
+        await SubItem.waitFor({ state: 'visible' });
+        await SubItem.hover();
+
+        const Subitem2 = this.page.locator('a:has-text("Sub Item")').nth(1);
+        await Subitem2.waitFor({state: 'visible'});
+        await Subitem2.hover();
+
+        const SubSubList = this.page.locator('a:has-text("SUB SUB LIST")');
+        await SubSubList.waitFor({state:'visible'});
+        await SubSubList.hover()
+
+        const SubSubItem1 = this.page.locator('a:has-text("Sub Sub Item 1")');
+        await SubSubItem1.waitFor({state:'visible'})
+        await SubSubItem1.hover();
+
+        const SubSubItem2 = this.page.locator('a:has-text("Sub Sub Item 2")');
+        await SubSubItem2.waitFor({state:'visible'})
+        await SubSubItem2.hover();
+
+        const MainItem3 = this.page.locator('a:has-text("Main Item 3")');
+        await MainItem3.waitFor({state:'visible'});
+        await MainItem3.hover()
+    }
 
 
 }
