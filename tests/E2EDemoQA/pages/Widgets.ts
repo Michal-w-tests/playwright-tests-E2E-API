@@ -130,7 +130,43 @@ export class WidgetsClass {
         //or 
         await expect(more).toHaveClass(/disabled/);
 
+    };
 
-    }
+    async ToolTips(){
+        const hover1 =  this.page.locator('#toolTipButton');
+        await hover1.hover();
+        await this.page.waitForSelector('.tooltip-inner', { state: 'visible'});
+        const hover1text = this.page.locator('.tooltip-inner');
+        await expect(hover1text).toHaveText('You hovered over the Button');
+        
+
+        const overTextField = this.page.locator('#texFieldToolTopContainer')
+        await overTextField.hover();
+        await this.page.waitForSelector('.tooltip-inner')
+        const tooltip = this.page.locator('.tooltip-inner');
+        console.log(await tooltip.innerText());
+        await this.page.waitForSelector('.tooltip-inner', { state: 'visible' });
+        await expect(tooltip).toHaveText('You hovered over the Button');
+
+    
+        const Contrary = this.page.locator('#texToolTopContainer a').first();
+        await Contrary.hover();
+        await this.page.waitForSelector('.tooltip-inner', { state: 'visible'});
+        const hover2text = this.page.locator('.tooltip-inner').first();
+        await expect(hover2text).toHaveText('You hovered over the Contrary');
+        await expect(hover2text).toBeVisible();
+
+        //ctrl + shift + c// hover over the element then press the ctrl+shift+c and hidden class should be visible in devtools 
+
+        const number = this.page.locator('#texToolTopContainer a').last();
+        await number.hover();
+        await this.page.waitForSelector('.tooltip-inner', { state: 'visible'});
+        const hover3text = this.page.locator('.tooltip-inner').nth(1);
+        await expect(hover3text).toHaveText('You hovered over the 1.10.32');
+        await expect(hover3text).toBeVisible();
+
+    };
+
+
 
 }

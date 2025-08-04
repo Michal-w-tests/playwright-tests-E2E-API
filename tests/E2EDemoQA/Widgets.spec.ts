@@ -45,6 +45,11 @@ const Widgets = new WidgetsClass(page);
                             accordionTexts.WhereDoesItComeFrom_part2,
                             accordionTexts.WhyDoWeUseIt
         )
-    })
+    });
+
+    await test.step('Tool Tips',async ()=>{
+        await Navigation.Navigation('Tool Tips');
+        await Widgets.ToolTips();
+    });
 
 })
