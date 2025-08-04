@@ -59,13 +59,18 @@ export class PracticeFormPage {
 
   async selectLocation(data: {address: string,state: string,city:string}){
     await this.Textarea.fill(data.address);
+    
     await this.State.click();
-    await this.page.getByText(data.state).first().click();
+    const stateOption = this.page.locator(`div[id^=react-select][id*=option]:has-text("${data.state}")`);
+    await stateOption.waitFor({ state: 'visible' });
+    await stateOption.click();
+    
     await this.City.click();
     const cityOption = this.page.locator(`div[id^=react-select][id*=option]:has-text("${data.city}")`);
-    await expect(cityOption).toBeVisible(); // overenie, že sa možnosť načítala
-    await cityOption.click();
-    //await this.page.getByText(data.city).first().click();
+    await cityOption.waitFor({state:'visible'});
+    await cityOption.click()
+    
+    
   };
 
   async submitForm(){
