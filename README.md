@@ -42,10 +42,15 @@ The purpose is to demonstrate skills in automated testing, API interaction (incl
 
 ---
 
+## 🎥 Demo Video
+
+▶️ [Click here to watch the demo video](tests/E2EDemoQA/media/demo.mp4)
+
+---
+
 ## 💻 How to run
 
 1️⃣ **Install dependencies**
-
 ```bash
 npm install
 
@@ -62,6 +67,7 @@ npx playwright show-report
 This project uses json-server to simulate a fake API backend.
 
 Files needed
+
 db.json: Contains initial data (users, posts, etc.)
 
 server.js: Custom server configuration with middleware (e.g., token authorization)
@@ -72,12 +78,10 @@ Example script in package.json
   "mock-server": "node server.js"
 }
 
+
 💬 Author
 Michal W.
 💼 Open to opportunities as an automation tester
-
-⭐️ Bonus
-If you like this repo or find it useful, feel free to give it a ⭐️ on GitHub!
 
 
 
